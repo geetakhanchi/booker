@@ -7,7 +7,9 @@ from sqlalchemy.sql import func
 class Customer(Base):
     __tablename__ = 'customers'
 
-    id = Column(Integer, ForeignKey('users.id'), primary_key=True)
+    
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey('user_profile.id'))
     name = Column(String)
     mobile_no = Column(String)
     mobile_verified = Column(Boolean)
@@ -19,7 +21,8 @@ class Customer(Base):
 class Admin(Base):
     __tablename__ = 'admins'
 
-    id = Column(Integer, ForeignKey('users.id'), primary_key=True)
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey('user_profile.id'))
     name = Column(String)
     mobile_no = Column(String)
     mobile_verified = Column(Boolean)
@@ -45,7 +48,8 @@ class Hotel(Base):
 class Staff(Base):
     __tablename__ = 'staffs'
 
-    id = Column(Integer, ForeignKey('users.id'), primary_key=True)
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey('user_profile.id'))
     name = Column(String)
     mobile_no = Column(String)
     mobile_verified = Column(Boolean)
@@ -75,7 +79,7 @@ class Booking(Base):
     booking_start_date = Column(Date)
     booking_end_date = Column(Date)
     booking_status = Column(String)
-    checks_complete = Column(String)
+    checks_complete = Column(Boolean)
     total_price = Column(Float)
 
 class Payment(Base):
@@ -100,8 +104,8 @@ class Rating(Base):
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
     comment = Column(String)
 
-class UserProfile(Base):
-    __tablename__ = 'user_profiles'
+class User(Base):
+    __tablename__ = 'user_profile'
 
     id = Column(Integer, primary_key=True, index=True)
     user_name = Column(String)

@@ -46,6 +46,7 @@ class ShowRoom(BaseModel):
 
     class Config():
         orm_mode = True 
+
 class Staff(BaseModel):
     name: str
 
@@ -57,8 +58,8 @@ class ShowStaff(BaseModel):
 
     class Config():
         orm_mode = True   
-        
-class UserProfile(BaseModel):
+
+class User(BaseModel):
     user_name: str
     email: str
     email_verified: bool 
@@ -75,15 +76,16 @@ class ShowUser(BaseModel):
         orm_mode = True   
 
 class Customer(BaseModel):
-    id: int
+    user_id: int
     name: str
     mobile_no: str
-    mobile_verified:bool 
+    mobile_verified: bool 
     dob: str
-    active:bool     
+    active: bool     
 
 class ShowCustomer(BaseModel):
     id: int
+    user_id: int
     name: str
     mobile_no: str
     mobile_verified:bool
@@ -95,21 +97,21 @@ class ShowCustomer(BaseModel):
     class Config():
         orm_mode = True              
 
-class Booking (BaseModel):
+class Booking(BaseModel):
     room_id: int
     customer_id: int
     booking_status: str
-    checks_complete: str
+    checks_complete: bool
     total_price: float
 
-class Booking (BaseModel):
+class ShowBooking(BaseModel):
     id: int
     room_id: int
     customer_id: int
     booking_start_date: str
     booking_end_date: str
     booking_status: str
-    checks_complete: str
+    checks_complete: bool
     total_price: float
 
     class Config():

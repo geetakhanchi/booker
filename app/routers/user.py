@@ -5,8 +5,8 @@ from sqlalchemy.orm import Session
 from ..repository import user
 
 router = APIRouter(
-    prefix="/profile",
-    tags=['User Profiles']
+    prefix="/user",
+    tags=['Users']
 )
 
 get_db = database.get_db
@@ -16,7 +16,7 @@ def all(db: Session = Depends(get_db)):
     return user.get_all(db)
 
 @router.post('/', status_code=status.HTTP_201_CREATED,)
-def create(request: schemas.UserProfile, db: Session = Depends(get_db)):
+def create(request: schemas.User, db: Session = Depends(get_db)):
     return user.create(request, db)
 
 
@@ -27,7 +27,7 @@ def destroy(id:int, db: Session = Depends(get_db)):
 
 
 @router.put('/{id}', status_code=status.HTTP_202_ACCEPTED)
-def update(id:int, request: schemas.UserProfile, db: Session = Depends(get_db)):
+def update(id:int, request: schemas.User, db: Session = Depends(get_db)):
     return user.update(id,request, db)
 
 

@@ -11,8 +11,14 @@ SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False,)
 
 Base = declarative_base()
 
+
 def get_db():
     db = SessionLocal()
+
+    # TIP-to-myself: Uncomment these lines, whenever face "no such column in table"
+    # from app.models import Customer
+    # Customer.__table__.drop(engine)
+
     try:
         yield db
     finally:
